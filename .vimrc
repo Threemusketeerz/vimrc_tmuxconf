@@ -36,7 +36,18 @@ no <down> ddp
 no <up> ddkP
 
 " Auto-expand closure
-inoremap {<CR> {<CR><BS>}<ESC>ko
+function! AutoExpand(char)
+    echom a:char
+    echom getline('.')[col('.')-1]
+
+    if getline('.')[col('.')-1] == a:char 
+        echom 'character' getline('.')[col('.')-1]
+    endif
+    return <CR>
+endf
+"inoremap <CR> <C-c>:call AutoExpand('}')<CR>
+
+inoremap { {<CR>}<ESC>ko
 inoremap [<CR> [<CR><BS>]<ESC>ko
 inoremap (<CR> (<CR><BS>)<ESC>ko
 
